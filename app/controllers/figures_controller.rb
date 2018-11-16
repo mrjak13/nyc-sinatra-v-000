@@ -4,8 +4,15 @@ class FiguresController < ApplicationController
     erb :'/figures/index'
   end
 
-  get '/figure/new' do
-    erb :'/figure/new'
+  get '/figures/new' do
+  
+    @titles = Title.all
+    @landmarks = Landmark.all
+    erb :'/figures/new'
+  end
+
+  post '/figures' do
+    
   end
 
 
