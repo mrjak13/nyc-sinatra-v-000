@@ -1,14 +1,16 @@
-<h1>CREATE NEW FIGURE</h1>
+<h1>EDIT <%="#{@figure.name}"%> HERE</h1>
 
-<form method="post" action="/figures">
+<form method="post" action="/figures/<%= @figure.id %>">
+  <input type="hidden" name="_method" value="patch">
+
   <label for="figure_name">Name</label>
-  <input type="text" name="figure[name]" id="figure_name">
+  <input type="text" name="figure[name]" id="figure_name" value="<%= @figure.name %>">
 
   <h3>Titles</h3>
 
   <% @titles.each do |title| %>
     <label for="title_<%= title.id %>"><%= title.name %></label>
-    <input id="title_<%= title.id %>" type="checkbox" name="figure[title_ids][]" value="title_<%= title.id %>">
+    <input id="title_<%= title.id %>" type="checkbox" name="figure[title_ids][]" value="<%= title.id %>" <%='checked' if @figure.titles.include?(title)%>>
     <br>
   <% end %>
 
@@ -20,7 +22,7 @@
 
   <% @landmarks.each do |landmark| %>
     <label for="landmark_<%= landmark.id %>"><%= landmark.name %></label>
-    <input id="landmark_<%= landmark.id %>" type="checkbox" name="figure[landmark_ids][]" value="landmark_<%= landmark.id %>">
+    <input id="landmark_<%= landmark.id %>" type="checkbox" name="figure[landmark_ids][]" value="<%= landmark.id %>" <%='checked' if @figure.landmarks.include?(landmark)%>>
     <br>
   <% end %>
 
@@ -32,10 +34,11 @@
   <label for="landmark_year">Year: </label>
   <input type="text" name="landmark[year]" id="landmark_year">
 
-  <input type="submit" value="Create New Figure">
+  <input type="submit" value="Edit Figure">
 </form>
 
 <br>
 
+<a class="button" href="/figures">Figures</a>
 <a class="button" href="/landmarks">Landmarks</a>
 <a class="button" href="/">Home</a>
