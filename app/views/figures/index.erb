@@ -1,4 +1,15 @@
 <h1>LIST ALL FIGURES HERE</h1>
 
+<%@figures.each do |figure|%>
+<%=figure.name%>
+<br>
+<%end%>
+
+<br>
+
+<a class="button" href="/figures/new">Create figure</a>
+
+<br></br>
+
 <a class="button" href="/landmarks">Landmarks</a>
 <a class="button" href="/">Home</a>
