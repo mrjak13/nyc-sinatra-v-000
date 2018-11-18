@@ -12,6 +12,9 @@ class FiguresController < ApplicationController
   end
 
   post '/figures' do
+
+    # FIX REPEATING TITLES AND LAND MARKS IE IF CREATED DONT CREATE AGAIN
+    # fIX IF NO CHECK BOXES SELECTED ERROR / BREAK
     if params[:figure][:name] == ""
       redirect '/figures/new'
     else
@@ -33,11 +36,13 @@ class FiguresController < ApplicationController
     # params[:figure][:name] => new figure name, [:title_ids] => new figures selected titles already created, [:landmark_ids] => new figures selected landmarks already created
     # FOR CREATING NEW TITLE params[:title]
     # FOR CREATING NEW LANDMARK params[:landmark][:name] & params[:landmark][:year]
-    redirect '/figures/#{@figure.id}'
+    redirect to "/figures/#{@figure.id}"
 
   end
 
   get '/figures/:id' do
+    # raise params.inspect
+    @figure = Figure.find(params[:id])
 
     erb :'/figures/show'
   end
